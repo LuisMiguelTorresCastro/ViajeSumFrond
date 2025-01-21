@@ -7,74 +7,103 @@
 <body>
   <div class="container">
     <h2>Crea una cuenta</h2>
-    <form id="register-form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" id="register-form">
       <div class="form-fields-container">
 
         <div class="form-group">
           <label for="nombreUsuario">Nombre:</label>
-          <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Ingresa tu nombre" required maxlength="30">
-          <div class="error-message" id="nombreUsuarioError"></div>
+          <input type="text" id="nombreUsuario" formControlName="nombreUsuario" placeholder="Ingresa tu nombre" required maxlength="30">
+          <div class="error-message" *ngIf="registerForm.get('nombreUsuario')?.touched && registerForm.get('nombreUsuario')?.invalid">
+            {{ getErrorMessage('nombreUsuario') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="apellidoUsuario">Apellido:</label>
-          <input type="text" id="apellidoUsuario" name="apellidoUsuario" placeholder="Ingresa tu apellido" required maxlength="30">
-          <div class="error-message" id="apellidoUsuarioError"></div>
+          <input type="text" id="apellidoUsuario" formControlName="apellidoUsuario" placeholder="Ingresa tu apellido" required maxlength="30">
+          <div class="error-message" *ngIf="registerForm.get('apellidoUsuario')?.touched && registerForm.get('apellidoUsuario')?.invalid">
+            {{ getErrorMessage('apellidoUsuario') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="telefonoUsuario">Teléfono:</label>
-          <input type="tel" id="telefonoUsuario" name="telefonoUsuario" placeholder="Ingresa tu teléfono" required maxlength="10" pattern="[0-9]{10}">
-          <div class="error-message" id="telefonoUsuarioError"></div>
+          <input type="tel" id="telefonoUsuario" formControlName="telefonoUsuario" placeholder="Ingresa tu teléfono" required maxlength="10">
+          <div class="error-message" *ngIf="registerForm.get('telefonoUsuario')?.touched && registerForm.get('telefonoUsuario')?.invalid">
+            {{ getErrorMessage('telefonoUsuario') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="direccionUsuario">Dirección:</label>
-          <input type="text" id="direccionUsuario" name="direccionUsuario" placeholder="Ingresa tu dirección" required>
-          <div class="error-message" id="direccionUsuarioError"></div>
+          <input type="text" id="direccionUsuario" formControlName="direccionUsuario" placeholder="Ingresa tu dirección" required>
+          <div class="error-message" *ngIf="registerForm.get('direccionUsuario')?.touched && registerForm.get('direccionUsuario')?.invalid">
+            {{ getErrorMessage('direccionUsuario') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="ciudad">Ciudad:</label>
-          <input type="text" id="ciudad" name="ciudad" placeholder="Ingresa tu ciudad" required maxlength="255">
-          <div class="error-message" id="ciudadError"></div>
+          <input type="text" id="ciudad" formControlName="ciudad" placeholder="Ingresa tu ciudad" required maxlength="255">
+          <div class="error-message" *ngIf="registerForm.get('ciudad')?.touched && registerForm.get('ciudad')?.invalid">
+            {{ getErrorMessage('ciudad') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="estado">Estado:</label>
-          <input type="text" id="estado" name="estado" placeholder="Ingresa tu estado" required maxlength="255">
-          <div class="error-message" id="estadoError"></div>
+          <input type="text" id="estado" formControlName="estado" placeholder="Ingresa tu estado" required maxlength="255">
+          <div class="error-message" *ngIf="registerForm.get('estado')?.touched && registerForm.get('estado')?.invalid">
+            {{ getErrorMessage('estado') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="codigoPostal">Código Postal:</label>
-          <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Ingresa tu código postal" required maxlength="5" pattern="[0-9]{5}">
-          <div class="error-message" id="codigoPostalError"></div>
+          <input type="text" id="codigoPostal" formControlName="codigoPostal" placeholder="Ingresa tu código postal" required maxlength="5">
+          <div class="error-message" *ngIf="registerForm.get('codigoPostal')?.touched && registerForm.get('codigoPostal')?.invalid">
+            {{ getErrorMessage('codigoPostal') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="correoElectronico">Correo Electrónico:</label>
-          <input type="email" id="correoElectronico" name="correoElectronico" placeholder="Ingresa tu correo electrónico" required>
-          <div class="error-message" id="correoElectronicoError"></div>
+          <input type="email" id="correoElectronico" formControlName="correoElectronico" placeholder="Ingresa tu correo electrónico" required>
+          <div class="error-message" *ngIf="registerForm.get('correoElectronico')?.touched && registerForm.get('correoElectronico')?.invalid">
+            {{ getErrorMessage('correoElectronico') }}
+          </div>
         </div>
 
         <div class="form-group">
           <label for="contraseñaUsuario">Contraseña:</label>
-          <input type="password" id="contraseñaUsuario" name="contraseñaUsuario" required minlength="8">
-          <div class="error-message" id="contraseñaUsuarioError"></div>
-        </div>
+          <input [type]="hidePassword ? 'password' : 'text'" id="contraseñaUsuario" formControlName="contraseñaUsuario" placeholder="Ingresa tu contraseña" required minlength="8">
+          <div class="password-icon">
+              <i class="fas" [ngClass]="{'fa-eye-slash': hidePassword, 'fa-eye': !hidePassword}" (click)="hidePassword = !hidePassword"></i>
+          </div>
+          <div class="error-message" *ngIf="registerForm.get('contraseñaUsuario')?.touched && registerForm.get('contraseñaUsuario')?.invalid">
+              {{ getErrorMessage('contraseñaUsuario') }}
+          </div>
+      </div>
 
         <div class="form-group">
-          <label for="confirmarContraseña">Confirmar Contraseña:</label>
-          <input type="password" id="confirmarContraseña" name="confirmarContraseña" required>
-          <div class="error-message" id="confirmarContraseñaError"></div>
+            <label for="confirmPassword">Confirmar Contraseña:</label>
+            <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirma tu contraseña" required>
+            <div class="password-icon">
+                <i class="fas" [ngClass]="{'fa-eye': !hideConfirmPassword, 'fa-eye-slash': hideConfirmPassword}" (click)="hideConfirmPassword = !hideConfirmPassword"></i>
+            </div>
+            <div class="error-message" *ngIf="registerForm.get('confirmPassword')?.touched && registerForm.get('confirmPassword')?.invalid">
+                {{ getErrorMessage('confirmPassword') }}
+            </div>
+            <div class="error-message" *ngIf="registerForm.hasError('passwordsNotMatch') && registerForm.get('confirmPassword')?.touched">
+                Las contraseñas no coinciden.
+            </div>
         </div>
       </div>
 
-      <button type="submit" class="register-button">Registrar</button>
+      <button type="submit" class="register-button" [disabled]="registerForm.invalid">Registrar</button>
     </form>
 
-    <button class="back-button" onclick="goToInicio()">
+    <button class="back-button" (click)="goToInicio()">
       Volver
     </button>
   </div>
