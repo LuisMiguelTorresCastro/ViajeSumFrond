@@ -1,7 +1,7 @@
 /* Estilo general para el cuerpo y elementos básicos */
 body {
-  margin: 0; /* Asegura que no haya márgenes por defecto */
-  font-family: 'Roboto', sans-serif; /* Fuente consistente en toda la página */
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 /* Estilo para el logo */
@@ -12,7 +12,7 @@ body {
 
 #logo h1 {
   margin: 0;
-  font-size: 1rem; /* Tamaño de fuente adaptable */
+  font-size: 1rem;
   font-weight: bold;
   color: white;
 }
@@ -30,10 +30,9 @@ body {
 mat-toolbar {
   background-color: #060607;
   position: relative; /* Para el posicionamiento absoluto del submenú */
-  z-index: 20; /* Asegura que la barra esté por encima del submenú */
   height: auto !important;
   min-height: 60px;
-  overflow-y: auto;
+  overflow-y: visible; /* Permite que el submenú se muestre */
 }
 
 /* Estilo del header */
@@ -43,7 +42,7 @@ mat-toolbar {
   align-items: center;
   width: 100%;
   color: white;
-  padding: 0.625rem; /* Equivalente a 10px con font-size base de 16px */
+  padding: 0.625rem;
 }
 
 /* Estilo de la navegación */
@@ -55,7 +54,7 @@ mat-toolbar {
 }
 
 #nav li {
-  margin-right: 1.25rem; /* Equivalente a 20px */
+  margin-right: 1.25rem;
   position: relative;
 }
 
@@ -63,9 +62,9 @@ mat-toolbar {
 #nav a {
   color: white;
   text-decoration: none;
-  padding: 0.625rem 0.9375rem; /* Equivalente a 10px 15px */
-  font-size: 0.875rem; /* Equivalente a 14px */
-  border-radius: 0.3125rem; /* Equivalente a 5px */
+  padding: 0.625rem 0.9375rem;
+  font-size: 0.875rem;
+  border-radius: 0.3125rem;
   transition: background 0.3s;
   white-space: nowrap;
   display: inline-flex;
@@ -80,32 +79,32 @@ mat-toolbar {
 /* Estilos para el elemento con submenú */
 #nav li.has-submenu {
   position: relative;
+  /* z-index eliminado, ya no es necesario aquí */
 }
 
 #nav li.has-submenu > a {
-  gap: 0.5rem; /* Equivalente a 8px */
+  gap: 0.5rem;
 }
 
 /* Menú desplegable (submenú) */
 #nav li .submenu {
   position: absolute;
-  top: 100%; /* Posiciona el submenú justo debajo del elemento padre */
-  left: 0; /* Alinea el submenú a la izquierda del elemento padre */
+  top: 100%;
+  left: 0;
   background-color: #050505;
   border: 1px solid #252729;
   border-radius: 0.3125rem;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15); /* Equivalente a 2px 8px */
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15);
   list-style-type: none;
-  padding: 0.3125rem 0; /* Equivalente a 5px 0 */
+  padding: 0.3125rem 0;
   margin: 0;
-  z-index: 10;
+  z-index: 1000; /* Asegura que el submenú esté por encima */
   display: none;
   flex-direction: column;
-  min-width: 12.5rem; /* Equivalente a 200px */
+  min-width: 12.5rem;
 }
 
-#nav li.has-submenu:hover .submenu,
-#nav li.has-submenu.active .submenu {
+#nav li.has-submenu:hover .submenu {
   display: flex;
 }
 
@@ -126,6 +125,11 @@ mat-toolbar {
   color: white;
   outline: none;
 }
+
+/* Ya no necesitas esto ya que el submenu se muestra con el hover*/
+/* #nav .submenu {
+  display: none;
+} */
 
 /* Media queries para responsividad */
 @media (max-width: 48rem) { /* Equivalente a 768px */
@@ -169,10 +173,12 @@ mat-toolbar {
 
   /* Ajustes para el botón del perfil en pantallas pequeñas */
   #nav li.has-submenu > a {
-      width: 95%;
-      margin: 0 auto;
-      align-items: center;
-      justify-content: center;
+    width: 95%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between; /* Modificación aquí */
+    gap: 0;
+    padding-right: 20px;
   }
 
   #nav li.has-submenu > a > span{
@@ -207,22 +213,21 @@ mat-toolbar {
   #nav li.has-submenu > a::after {
       content: '\25BC'; /* Flecha hacia abajo */
       font-size: 0.75rem; /* Equivalente a 12px */
-      margin-left: 0.625rem; /* Equivalente a 10px */
   }
 
-  #nav li.has-submenu.active > a::after {
-      transform: rotate(180deg); /* Flecha hacia arriba para el estado activo */
+  /* Mostrar submenú al hacer clic (o tap) en el elemento padre */
+  #nav li.has-submenu:focus-within .submenu {
+    display: flex;
+    flex-direction: column;
   }
-
-  /* Mostrar submenú al activar la clase .active */
-  #nav li.has-submenu.active .submenu {
-      display: flex;
-      flex-direction: column;
+  
+  #nav li.has-submenu:focus-within > a::after {
+    transform: rotate(180deg);
   }
 
   /* Asegurarse de que los botones sean visibles */
   #nav li a,
   #nav li.has-submenu > a {
-      display: block !important; /* Forzar la visibilidad */
+    display: flex !important; /* Forzar la visibilidad */
   }
 }
