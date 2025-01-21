@@ -1,0 +1,314 @@
+/* General body styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #070707;
+  line-height: 1.6;
+  background-color: #f7f7f7; /* Fondo ligero para contraste */
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar horizontalmente */
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+/* Estilos para la barra de búsqueda */
+.search-bar {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 25px; /* Ajusta el radio para redondear los bordes */
+  padding: 10px;
+  width: 100%;
+  max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin-bottom: 30px;
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.search-input .icon {
+  margin-right: 5px;
+  color: #555;
+}
+
+.search-input input,
+.search-input input[type="date"] {
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 5px;
+  background-color: transparent; /* Fondo transparente para que no se vea el borde por defecto del input */
+}
+
+.search-input input[type="number"]{
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 5px;
+  width: 85px;
+  background-color: transparent; /* Fondo transparente para que no se vea el borde por defecto del input */
+}
+
+.search-input input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.search-input input[type="date"]::-webkit-inner-spin-button,
+.search-input input[type="date"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.search-input input::placeholder {
+  color: #999;
+}
+
+.search-button {
+  background-color: #090808; /* Color de fondo del botón */
+  color: white;
+  border: none;
+  border-radius: 50%; /* Botón completamente redondo */
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
+  transition: background-color 0.3s ease;
+}
+
+.search-button mat-icon {
+  font-size: 24px;
+}
+
+.search-button:hover {
+  background-color: #e0464b; /* Color al pasar el ratón por encima */
+}
+
+/* Contenedor principal para el mapa y las tarjetas */
+.map-packages-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch; /* Alinea los elementos a la misma altura */
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 97.4%;
+  flex-wrap: wrap;
+}
+
+/* Mapa */
+#map {
+  width: 100%;
+  height: 100%; /* Ajustar la altura al tamaño del contenedor */
+  min-height: 300px; /* Altura mínima para alinearse con las tarjetas de paquetes */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la tarjeta de mapa */
+.map-card {
+  width: 100%;
+  max-width: 300px;
+  height: 100%; /* Ajusta la altura para alinearse con las tarjetas de paquetes */
+}
+
+/* Estilos para los botones de opciones (si se aplican) */
+.button-options button:hover {
+  background-color: #0056b3; /* Color de fondo cuando el usuario pasa el mouse */
+}
+
+.button-options button:active {
+  background-color: #004085; /* Color de fondo cuando el botón es presionado */
+}
+
+.button-options button:focus {
+  outline: none; /* Eliminar el borde de enfoque */
+}
+
+/* Media query para los botones de opciones en pantallas pequeñas (si se aplica) */
+@media (max-width: 768px) {
+  .button-options {
+    flex-direction: column; /* En pantallas pequeñas, apilar los botones */
+    align-items: center; /* Centrar los botones */
+  }
+
+  .button-options button {
+    width: 100%; /* Los botones ocuparán el 100% del ancho disponible */
+    margin-bottom: 10px; /* Espacio entre los botones */
+  }
+}
+
+/* Estilos para listas (si se aplican) */
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* Estilos para títulos y campos de entrada (si se aplican) */
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+/* Estilos para botones (si se aplican) */
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para resultados (si se aplican) */
+.result-item {
+  margin: 15px 0;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.result-item h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.result-item p {
+  color: #666;
+  font-size: 14px;
+  margin: 5px 0 0;
+}
+
+.no-results {
+  color: #999;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+/* Cuadrícula de paquetes */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Estilo de tarjetas de paquetes */
+.paquete-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ajusta al ancho del contenedor en pantallas pequeñas */
+  max-width: 410px; 
+  min-height: 170px; 
+}
+
+/* Contenedor de imagen */
+.image-container {
+  flex: 0 0 auto;
+  width: 100%; /* La imagen ocupa el ancho completo del contenedor */
+}
+
+/* Estilo de la imagen */
+.image-preview {
+  width: 100%; /* Ajusta la imagen al ancho del contenedor */
+  height: auto; /* Mantén la proporción de la imagen */
+  border-radius: 8px 8px 0 0; /* Esquinas redondeadas solo arriba */
+  margin-right: 0; /* Elimina el margen derecho */
+}
+
+/* Contenedor de contenido de la tarjeta */
+.card-content {
+  flex: 1;
+  padding: 10px;
+  text-align: left; 
+  font-family: Arial, sans-serif; 
+}
+
+.card-header {
+  margin-bottom: 10px; 
+}
+
+.card-header mat-card-title {
+  font-size: 1.4rem; 
+  font-weight: bold; 
+  color: #00796b; 
+}
+
+/* Texto dentro de las tarjetas */
+.card-content p {
+  margin: 8px 0; 
+  font-size: 1rem;
+  line-height: 1.5; 
+  word-wrap: break-word; 
+  text-overflow: ellipsis; 
+}
+
+/* Destacar los encabezados en los párrafos */
+.card-content p strong {
+  color: #004d40;
+  font-weight: bold; 
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .map-packages-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #map {
+    width: 100%;
+    margin-bottom: 20px;
+    min-height: 200px; 
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+  }
+  .search-bar{
+    flex-direction: column;
+    border-radius: 15px;
+  }
+  .search-input {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+  .search-input input[type="number"]{
+    width: 90%;
+  }
+
+}

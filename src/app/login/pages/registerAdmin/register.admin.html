@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <link rel="stylesheet" href="register.admin.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Crea una cuenta</h2>
+    <form id="register-form" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+      <div class="form-fields-container">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre:</mat-label>
+          <input matInput type="text" id="nombreUsuario" [(ngModel)]="nombreUsuario" name="nombreUsuario" placeholder="Ingresa tu nombre" required #nombreUsuarioControl="ngModel">
+          <mat-error *ngIf="nombreUsuarioControl.invalid && (nombreUsuarioControl.dirty || nombreUsuarioControl.touched)">
+            <span *ngIf="nombreUsuarioControl.errors?.['required']">El nombre es requerido.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Apellido:</mat-label>
+          <input matInput type="text" id="apellidoUsuario" [(ngModel)]="apellidoUsuario" name="apellidoUsuario" placeholder="Ingresa tu apellido" required #apellidoUsuarioControl="ngModel">
+          <mat-error *ngIf="apellidoUsuarioControl.invalid && (apellidoUsuarioControl.dirty || apellidoUsuarioControl.touched)">
+            <span *ngIf="apellidoUsuarioControl.errors?.['required']">El apellido es requerido.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono:</mat-label>
+          <input matInput type="tel" id="telefonoUsuario" [(ngModel)]="telefonoUsuario" name="telefonoUsuario" placeholder="Ingresa tu teléfono" required pattern="^\+?\d[\d -]{8,12}\d$" #telefonoUsuarioControl="ngModel">
+          <mat-error *ngIf="telefonoUsuarioControl.invalid && (telefonoUsuarioControl.dirty || telefonoUsuarioControl.touched)">
+            <span *ngIf="telefonoUsuarioControl.errors?.['required']">El teléfono es requerido.</span>
+            <span *ngIf="telefonoUsuarioControl.errors?.['pattern']">Ingresa un teléfono válido (ej. +56912345678 o 555-123-4567).</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Dirección:</mat-label>
+          <input matInput type="text" id="direccionUsuario" [(ngModel)]="direccionUsuario" name="direccionUsuario" placeholder="Ingresa tu dirección" required #direccionUsuarioControl="ngModel">
+          <mat-error *ngIf="direccionUsuarioControl.invalid && (direccionUsuarioControl.dirty || direccionUsuarioControl.touched)">
+            <span *ngIf="direccionUsuarioControl.errors?.['required']">La dirección es requerida.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad:</mat-label>
+          <input matInput type="text" id="ciudad" [(ngModel)]="ciudad" name="ciudad" placeholder="Ingresa tu ciudad" required #ciudadControl="ngModel">
+          <mat-error *ngIf="ciudadControl.invalid && (ciudadControl.dirty || ciudadControl.touched)">
+            <span *ngIf="ciudadControl.errors?.['required']">La ciudad es requerida.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Estado:</mat-label>
+          <input matInput type="text" id="estado" [(ngModel)]="estado" name="estado" placeholder="Ingresa tu estado" required #estadoControl="ngModel">
+          <mat-error *ngIf="estadoControl.invalid && (estadoControl.dirty || estadoControl.touched)">
+            <span *ngIf="estadoControl.errors?.['required']">El estado es requerido.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Código Postal:</mat-label>
+          <input matInput type="text" id="codigoPostal" [(ngModel)]="codigoPostal" name="codigoPostal" placeholder="Ingresa tu código postal" required #codigoPostalControl="ngModel">
+          <mat-error *ngIf="codigoPostalControl.invalid && (codigoPostalControl.dirty || codigoPostalControl.touched)">
+            <span *ngIf="codigoPostalControl.errors?.['required']">El código postal es requerido.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo Electrónico:</mat-label>
+          <input matInput type="email" id="correoElectronico" name="correoElectronico" placeholder="Ingresa tu correo electrónico" required [(ngModel)]="correoUsuario" email #correoElectronicoControl="ngModel">
+          <mat-error *ngIf="correoElectronicoControl.invalid && (correoElectronicoControl.dirty || correoElectronicoControl.touched)">
+            <span *ngIf="correoElectronicoControl.errors?.['required']">El correo electrónico es requerido.</span>
+            <span *ngIf="correoElectronicoControl.errors?.['email']">Ingresa un correo electrónico válido.</span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña:</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" id="password" [(ngModel)]="password" name="password" required minlength="8" (input)="checkPassword()" pattern="(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])" #passwordControl="ngModel">
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="passwordControl.invalid && (passwordControl.dirty || passwordControl.touched)">
+            <span *ngIf="passwordControl.errors?.['required']">La contraseña es requerida.</span>
+            <span *ngIf="passwordControl.errors?.['minlength'] || passwordControl.errors?.['pattern']">
+              La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirmar Contraseña:</mat-label>
+          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required #confirmPasswordControl="ngModel">
+          <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="confirmPassword !== password && (confirmPasswordControl.dirty || confirmPasswordControl.touched)">
+            Las contraseñas no coinciden.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+
+      <button mat-raised-button color="primary" type="submit" class="register-button" [disabled]="registerForm.invalid || confirmPassword !== password">Registrar</button>
+    </form>
+
+    <button mat-raised-button routerLink="/Auth" class="back-button">Volver</button>
+  </div>
+</body>
+</html>

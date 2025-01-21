@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link href="inicio.component.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <!--Map-paquetes-->    
+            <div class="map-packages-container">
+                <mat-card class="map-card">
+                    <mat-card-content class="card-content">
+                        <!-- Mapa en tamaño pequeño -->
+                        <div id="map" class="map-card"></div>
+                    </mat-card-content>
+                </mat-card>
+            
+                <mat-card-content class="card-content">
+                  <div class="card-grid">
+                    <div *ngFor="let paquete of paquetes" class="card-item">
+                      <mat-card class="paquete-card" (click)="viewPaqueteDetails(paquete?.idPaquete)">                        <div class="image-container">
+                          <img mat-card-image 
+                               [src]="paquete.imageUrl || 'assets/default-image.jpg'" 
+                               [alt]="paquete.nombrePaquete" 
+                               class="image-preview">
+                        </div>
+                        <mat-card-header class="card-header">
+                          <mat-card-title>{{ paquete.nombrePaquete }}</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                          <p><strong>Descripción:</strong> {{ paquete.descripcion }}</p>
+                          <p><strong>Categoría:</strong> {{ paquete.categoria }}</p>
+                          <p><strong>Costo:</strong> {{ paquete.costo | currency }}</p>
+                          <p><strong>Tipo:</strong> {{ paquete.tipo }}</p>
+                        </mat-card-content>
+                      </mat-card>
+                    </div>
+                  </div>
+                </mat-card-content>
+            </div>            
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- Leaflet JS -->
+    <script src="/ViajeSum-main/src/app/viaje-sum/pages/inicio/script.js"></script>
+</body>
+</html>

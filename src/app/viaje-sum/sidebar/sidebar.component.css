@@ -1,0 +1,228 @@
+/* Estilo general para el cuerpo y elementos básicos */
+body {
+  margin: 0; /* Asegura que no haya márgenes por defecto */
+  font-family: 'Roboto', sans-serif; /* Fuente consistente en toda la página */
+}
+
+/* Estilo para el logo */
+#logo {
+  display: flex;
+  align-items: center;
+}
+
+#logo h1 {
+  margin: 0;
+  font-size: 1rem; /* Tamaño de fuente adaptable */
+  font-weight: bold;
+  color: white;
+}
+
+#logo a {
+  text-decoration: none;
+  color: #f4f4f4;
+}
+
+#logo a:hover {
+  color: #fafaf9;
+}
+
+/* Estilo para la barra de herramientas */
+mat-toolbar {
+  background-color: #060607;
+  position: relative; /* Para el posicionamiento absoluto del submenú */
+  z-index: 20; /* Asegura que la barra esté por encima del submenú */
+  height: auto !important;
+  min-height: 60px;
+  overflow-y: auto;
+}
+
+/* Estilo del header */
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: white;
+  padding: 0.625rem; /* Equivalente a 10px con font-size base de 16px */
+}
+
+/* Estilo de la navegación */
+#nav ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#nav li {
+  margin-right: 1.25rem; /* Equivalente a 20px */
+  position: relative;
+}
+
+/* Estilos para los botones principales */
+#nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.625rem 0.9375rem; /* Equivalente a 10px 15px */
+  font-size: 0.875rem; /* Equivalente a 14px */
+  border-radius: 0.3125rem; /* Equivalente a 5px */
+  transition: background 0.3s;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#nav a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para el elemento con submenú */
+#nav li.has-submenu {
+  position: relative;
+}
+
+#nav li.has-submenu > a {
+  gap: 0.5rem; /* Equivalente a 8px */
+}
+
+/* Menú desplegable (submenú) */
+#nav li .submenu {
+  position: absolute;
+  top: 100%; /* Posiciona el submenú justo debajo del elemento padre */
+  left: 0; /* Alinea el submenú a la izquierda del elemento padre */
+  background-color: #050505;
+  border: 1px solid #252729;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15); /* Equivalente a 2px 8px */
+  list-style-type: none;
+  padding: 0.3125rem 0; /* Equivalente a 5px 0 */
+  margin: 0;
+  z-index: 10;
+  display: none;
+  flex-direction: column;
+  min-width: 12.5rem; /* Equivalente a 200px */
+}
+
+#nav li.has-submenu:hover .submenu,
+#nav li.has-submenu.active .submenu {
+  display: flex;
+}
+
+/* Estilos de los elementos del submenú */
+#nav li .submenu a {
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  padding: 0.625rem 0.9375rem;
+  width: auto;
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+}
+
+#nav li .submenu a:hover,
+#nav li .submenu a:focus {
+  background-color: #252729;
+  color: white;
+  outline: none;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 48rem) { /* Equivalente a 768px */
+  #header {
+      flex-direction: column;
+      align-items:center;
+      height: auto;
+  }
+
+  #logo {
+      margin-bottom: 0.625rem;
+      width: 100%;
+      justify-content: center;
+  }
+
+  #nav ul {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-items: stretch;
+      padding-bottom: 1rem;
+  }
+
+  #nav li {
+      display: block;
+      margin-right: 0;
+      margin-bottom: 0.625rem;
+      width: 100%;
+  }
+
+  /* Ajustes para los botones en pantallas pequeñas */
+  #nav a {
+      display: flex;
+      width: 95%;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 1rem;
+      justify-content: center;
+      margin: 0 auto;
+  }
+
+  /* Ajustes para el botón del perfil en pantallas pequeñas */
+  #nav li.has-submenu > a {
+      width: 95%;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: center;
+  }
+
+  #nav li.has-submenu > a > span{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center
+  }
+
+  /* Ajustes para el icono del botón del perfil */
+  #nav li.has-submenu > a > span > fa-icon {
+      font-size: 1rem; /* Ajusta el tamaño del icono para pantallas pequeñas */
+  }
+
+  #nav li .submenu {
+      position: relative; /* El submenú se integra en el flujo normal */
+      top: auto;
+      left: auto;
+      width: 100%;
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
+      display: none; /* Oculto por defecto */
+  }
+
+  #nav li .submenu a {
+      padding: 0.625rem 0.9375rem;
+      width: 90%;
+  }
+
+  /* Icono para indicar submenú */
+  #nav li.has-submenu > a::after {
+      content: '\25BC'; /* Flecha hacia abajo */
+      font-size: 0.75rem; /* Equivalente a 12px */
+      margin-left: 0.625rem; /* Equivalente a 10px */
+  }
+
+  #nav li.has-submenu.active > a::after {
+      transform: rotate(180deg); /* Flecha hacia arriba para el estado activo */
+  }
+
+  /* Mostrar submenú al activar la clase .active */
+  #nav li.has-submenu.active .submenu {
+      display: flex;
+      flex-direction: column;
+  }
+
+  /* Asegurarse de que los botones sean visibles */
+  #nav li a,
+  #nav li.has-submenu > a {
+      display: block !important; /* Forzar la visibilidad */
+  }
+}

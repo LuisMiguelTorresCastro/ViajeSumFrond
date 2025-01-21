@@ -1,0 +1,35 @@
+<form [formGroup]="firstFormGroup" (ngSubmit)="openConfirmDialog()">
+  <ng-template matStepLabel>Información Básica</ng-template>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre Agencia</mat-label>
+    <input matInput formControlName="nombreAgencia" placeholder="Nombre Agencia" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descripción Agencia</mat-label>
+    <textarea matInput formControlName="descripcion" placeholder="Descripción Agencia" rows="4"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>URL de la Imagen</mat-label>
+    <input matInput formControlName="imageUrl" placeholder="URL de la imagen">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Correo Electrónico</mat-label>
+    <input matInput formControlName="correo" placeholder="Correo Electrónico">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="telefono" placeholder="Teléfono">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Dirección</mat-label>
+    <input matInput formControlName="direccion" placeholder="Dirección">
+  </mat-form-field>
+
+  <button mat-button type="submit">Guardar</button>
+</form>

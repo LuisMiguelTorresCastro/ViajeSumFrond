@@ -1,0 +1,145 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #e0f7fa; /* Celeste muy claro */
+  margin: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.container {
+  max-width: 450px; /* Aumentado un poco el ancho máximo */
+  width: 90%;
+  padding: 25px 30px; /* Aumentado el padding */
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-height: 95vh;
+  overflow-y: auto;
+}
+
+h2 {
+  text-align: center;
+  color: #007bff; /* Azul */
+  margin-bottom: 25px; /* Aumentado el margin-bottom */
+  font-size: 24px; /* Aumentado el tamaño de fuente */
+}
+
+.form-fields-container {
+  /* Sin cambios */
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px; /* Aumenté el margin-bottom */
+}
+
+label {
+  display: block;
+  margin-bottom: 8px; /* Aumenté el margin-bottom */
+  font-weight: bold;
+  color: #555; /* Un tono de gris más oscuro para mejor contraste */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: calc(100% - 22px); /* Ajusté el ancho considerando el padding */
+  padding: 12px; /* Aumenté el padding */
+  border: 1px solid #ccc; /* Un tono de gris más claro */
+  border-radius: 5px; /* Bordes más redondeados */
+  font-size: 16px; /* Aumenté el tamaño de la fuente */
+  margin-bottom: 5px; /* Espacio para el mensaje de error */
+}
+
+.error-message {
+  color: red;
+  font-size: 14px; /* Aumenté un poco el tamaño de la fuente */
+  margin-top: 5px;
+  display: block;
+}
+
+.register-button,
+.back-button {
+  background-color: #007bff; /* Azul */
+  color: white;
+  border: none;
+  padding: 12px 20px; /* Aumenté el padding */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px; /* Aumenté el tamaño de la fuente */
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 5px; /* Bordes más redondeados */
+  width: 100%;
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.back-button {
+  background-color: #6c757d; /* Gris */
+}
+
+.register-button:hover,
+.back-button:hover {
+  opacity: 0.8;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra al hacer hover */
+}
+
+/* Media Queries para hacerlo responsive */
+@media (max-width: 768px) {
+  .container {
+    max-width: 95%;
+    padding: 20px;
+    max-height: 98vh;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .error-message {
+    font-size: 13px;
+  }
+
+  .register-button,
+  .back-button {
+    font-size: 17px;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 15px;
+      max-height: 98vh;
+    }
+  h2 {
+    font-size: 20px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    font-size: 14px;
+    }
+    .register-button,
+  .back-button {
+    font-size: 16px;
+    }
+}

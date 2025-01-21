@@ -1,0 +1,116 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [ngStyle]="{ width: '250px' }">
+    <mat-toolbar color="primary">
+      <span>Panel de Administración</span>
+    </mat-toolbar>
+    
+    <mat-nav-list>
+      <mat-list-item routerLink="/Auth"> 
+        <span>Inicio</span>
+      </mat-list-item>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Agencia
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="/Auth/registro" (click)="sidenav.toggle()">
+          <mat-icon>add</mat-icon>
+          <span>Registrar Agencia</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/Auth/edit" (click)="sidenav.toggle()">
+          <mat-icon>update</mat-icon>
+          <span>Actualizar Agencia</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/Auth/eliminar" (click)="sidenav.toggle()">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar Agencia</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Paquete
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="/Auth/registrop" (click)="sidenav.toggle()">
+          <mat-icon>add</mat-icon>
+          <span>Registrar Paquete</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/Auth/editp" (click)="sidenav.toggle()">
+          <mat-icon>update</mat-icon>
+          <span>Actualizar Paquete</span>
+        </mat-list-item>
+        <mat-list-item routerLink="/Auth/eliminarp" (click)="sidenav.toggle()">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar Paquete</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Registro admin
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="/Login/registerAdmin" (click)="sidenav.toggle()">
+          <mat-icon>add</mat-icon>
+          <span>Registrar Admin</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            twitter
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="/Auth/twitter" (click)="sidenav.toggle()">
+          <mat-icon>comment</mat-icon>
+          <span>comment</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+            <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            twich
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-list-item routerLink="/Auth/twitch" (click)="sidenav.toggle()">
+          <mat-icon>comment</mat-icon>
+          <span>comment</span>
+        </mat-list-item>
+      </mat-expansion-panel>
+
+      <mat-list-item (click)="logout()"> 
+        <mat-icon>logout</mat-icon>
+        <span>Salir</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <span>Bienvenido, Administrador</span>
+  </mat-toolbar>
+
+  <div class="content">
+    <router-outlet>   
+    </router-outlet>
+  </div>
+</mat-sidenav-container>

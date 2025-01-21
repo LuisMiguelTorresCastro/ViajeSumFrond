@@ -1,0 +1,42 @@
+<div class="twitch-container">
+  <h1>Gestor de Transmisión en Twitch</h1>
+
+  <!-- Mostrar login o iniciar stream -->
+  <div *ngIf="!isStreaming; else liveTemplate">
+    <button class="login-btn" (click)="login()">Iniciar Sesión con Twitch</button>
+
+    <div class="stream-form" *ngIf="accessToken">
+      <h2>Iniciar Transmisión</h2>
+      
+      <label for="title">Título de la transmisión:</label>
+      <input type="text" id="title" [(ngModel)]="title" placeholder="Título" required />
+
+      <label for="game_id">ID del juego:</label>
+      <input type="text" id="game_id" [(ngModel)]="game_id" placeholder="ID del juego" required />
+
+      <button class="start-btn" (click)="startStream()" [disabled]="!title || !game_id">Iniciar Transmisión</button>
+    </div>
+  </div>
+
+  <!-- Mostrar transmisión en vivo -->
+  <ng-template #liveTemplate>
+    <div class="live-status">
+      <h2>¡Transmisión en Vivo!</h2>
+      <p><strong>Título:</strong> {{ title }}</p>
+      <p><strong>ID del juego:</strong> {{ game_id }}</p>
+
+      <button class="stop-btn" (click)="stopStream()">Detener Transmisión</button>
+
+      <div class="twitch-player">
+        <iframe
+          [src]="sanitizedUrl"
+          height="480"
+          width="800"
+          frameborder="0"
+          scrolling="no"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </ng-template>
+</div>

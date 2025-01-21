@@ -1,0 +1,76 @@
+<div class="container">
+  <form [formGroup]="updFormGroup" (ngSubmit)="updPaquete()">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Selecciona un paquete</mat-label>
+        <mat-select [value]="paqueteNombre" (selectionChange)="onPaqueteSelected($event.value)">
+          <mat-option *ngFor="let paquete of paquetes" [value]="paquete.nombrePaquete">
+            {{ paquete.nombrePaquete }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="!paqueteNombre && updFormGroup.touched">
+          Debes seleccionar un paquete para actualizar.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre del Paquete</mat-label>
+      <input matInput formControlName="nombrePaquete" required>
+      <mat-error *ngIf="updFormGroup.get('nombrePaquete')?.hasError('required')">
+        El nombre del paquete es obligatorio.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Categoría</mat-label>
+      <input matInput formControlName="categoria" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Costo</mat-label>
+      <input matInput formControlName="costo" type="number" step="0.01" min="0" required />
+      <mat-error *ngIf="updFormGroup.get('costo')?.hasError('required')">
+        El costo es obligatorio.
+      </mat-error>
+      <mat-error *ngIf="updFormGroup.get('costo')?.hasError('min')">
+        El costo debe ser un número positivo.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option value="activo">Activo</mat-option>
+        <mat-option value="inactivo">Inactivo</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Descuento (%)</mat-label>
+      <input matInput formControlName="descuento" type="number" min="0" max="100" step="0.01" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Valoración</mat-label>
+      <input matInput formControlName="valoracion" type="number" min="0" max="5" step="0.1" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo</mat-label>
+      <input matInput formControlName="tipo" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>URL de Imagen</mat-label>
+      <input matInput formControlName="imageUrl" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Actualizar Paquete</button>
+  </form>
+</div>

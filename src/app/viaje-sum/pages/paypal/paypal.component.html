@@ -1,0 +1,16 @@
+<div class="paypal-container">
+    <h2>Complete su pago</h2>
+    <p>Revise su pedido y complete el pago de forma segura con PayPal.</p>
+    <div *ngIf="paquete">
+        <h2>Detalles del Paquete</h2>
+        <div>
+          <p><strong>Nombre:</strong> {{ paquete.nombrePaquete }}</p>
+          <p><strong>Descripción:</strong> {{ paquete.descripcion }}</p>
+          <p><strong>Precio:</strong> ${{ paquete.costo }}</p>
+          <!-- Agregar otros detalles si es necesario -->
+        </div>
+      </div>
+    <!-- Contenedor de botones de PayPal -->
+    <div class="paypal" id="paypal-button-container"></div>
+  </div>
+  

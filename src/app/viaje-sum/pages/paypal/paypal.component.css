@@ -1,0 +1,76 @@
+/* Contenedor principal de la sección de pago */
+.paypal-container {
+  background-color: #f9f9f9; /* Color de fondo suave */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 20px; /* Espaciado interno */
+  max-width: 600px; /* Limitar el ancho para no extenderse demasiado */
+  margin: 20px auto; /* Centrado automático en la página */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Título principal */
+.paypal-title {
+  font-size: 24px;
+  color: #333; /* Color oscuro para el texto */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Descripción introductoria */
+.paypal-description {
+  font-size: 16px;
+  color: #555; /* Color gris claro para el texto */
+  margin-bottom: 20px;
+}
+
+/* Título de los detalles del paquete */
+.package-title {
+  font-size: 20px;
+  color: #007bff; /* Color azul para resaltar el título */
+  margin-bottom: 15px;
+}
+
+/* Estilo para los detalles del paquete */
+.package-details {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+/* Estilo para cada línea de detalle del paquete */
+.package-details p {
+  font-size: 16px;
+  color: #333;
+  margin: 8px 0;
+}
+
+.package-details strong {
+  color: #007bff; /* Resaltar las etiquetas con color azul */
+}
+
+/* Contenedor del botón de PayPal */
+.paypal {
+  margin-top: 20px;
+  text-align: center; /* Centrar el botón de PayPal */
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 600px) {
+  .paypal-container {
+    padding: 15px; /* Menos padding en pantallas pequeñas */
+  }
+  .paypal-title {
+    font-size: 22px; /* Reducir tamaño de título */
+  }
+  .paypal-description {
+    font-size: 14px; /* Reducir tamaño de descripción */
+  }
+  .package-title {
+    font-size: 18px; /* Reducir tamaño de título de paquete */
+  }
+  .package-details {
+    padding: 12px; /* Menos padding en detalles */
+  }
+}

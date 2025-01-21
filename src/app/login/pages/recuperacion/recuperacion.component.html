@@ -1,0 +1,51 @@
+<h2>Recuperar Contraseña</h2>
+
+<form [formGroup]="solicitudTokenForm" (ngSubmit)="solicitarToken()" *ngIf="!correoEnviado">
+  <div *ngIf="solicitudTokenForm.get('correoElectronico')?.invalid && solicitudTokenForm.get('correoElectronico')?.touched" class="form-error">
+    <div *ngIf="solicitudTokenForm.get('correoElectronico')?.errors?.['required']">El correo electrónico es requerido.</div>
+    <div *ngIf="solicitudTokenForm.get('correoElectronico')?.errors?.['email']">El correo electrónico no es válido.</div>
+  </div>
+  <input type="email" placeholder="Correo Electrónico" formControlName="correoElectronico">
+  <button type="submit" [disabled]="cargando">Enviar Correo</button>
+</form>
+
+<form [formGroup]="verificacionForm" (ngSubmit)="verificarToken()" *ngIf="correoEnviado && !tokenVerificado">
+  <div class="temporizador" *ngIf="tiempoRestante > 0">Tiempo restante: {{ tiempoRestante }} segundos</div>
+  <div *ngIf="verificacionForm.get('token')?.invalid && verificacionForm.get('token')?.touched" class="form-error">
+    <div *ngIf="verificacionForm.get('token')?.errors?.['required']">El token es requerido.</div>
+  </div>
+  <input type="text" placeholder="Token" formControlName="token">
+  <button type="submit">Verificar Token</button>
+</form>
+
+<div *ngIf="tokenVerificado">
+  <form [formGroup]="cambioContrasenaForm" (ngSubmit)="cambiarContrasena()">
+    <div class="password-container">
+        <input [type]="mostrarContrasena ? 'text' : 'password'" placeholder="Nueva Contraseña" formControlName="nuevaContrasena">
+        <i class="password-icon" [ngClass]="mostrarContrasena ? 'fa fa-eye-slash' : 'fa fa-eye'" (click)="toggleMostrarContrasena()"></i>
+      </div>
+    <div *ngIf="cambioContrasenaForm.get('nuevaContrasena')?.invalid && cambioContrasenaForm.get('nuevaContrasena')?.touched" class="form-error">
+      <div *ngIf="cambioContrasenaForm.get('nuevaContrasena')?.errors?.['required']">La nueva contraseña es requerida.</div>
+      <div *ngIf="cambioContrasenaForm.get('nuevaContrasena')?.errors?.['minlength']">La nueva contraseña debe tener al menos 8 caracteres.</div>
+    </div>
+    <div class="password-container">
+        <input [type]="mostrarConfirmarContrasena ? 'text' : 'password'" placeholder="Confirmar Contraseña" formControlName="confirmarContrasena">
+        <i class="password-icon" [ngClass]="mostrarConfirmarContrasena ? 'fa fa-eye-slash' : 'fa fa-eye'" (click)="toggleMostrarConfirmarContrasena()"></i>
+    </div>
+    <div *ngIf="cambioContrasenaForm.get('confirmarContrasena')?.invalid && cambioContrasenaForm.get('confirmarContrasena')?.touched" class="form-error">
+      <div *ngIf="cambioContrasenaForm.get('confirmarContrasena')?.errors?.['required']">La confirmación de la contraseña es requerida.</div>
+    </div>
+    <div *ngIf="cambioContrasenaForm.errors?.['passwordMismatch'] && cambioContrasenaForm.get('confirmarContrasena')?.touched" class="form-error">
+      Las contraseñas no coinciden.
+    </div>
+    <button type="submit" [disabled]="cambioContrasenaForm.invalid">Cambiar Contraseña</button>
+  </form>
+</div>
+<div *ngIf="mensaje === 'Contraseña actualizada exitosamente.'" class="login-button">
+  <button (click)="irALogin()">Ir a Login</button>
+</div>
+<div>
+  <button (click)="irAregresar()">regresar</button>
+</div>
+<div *ngIf="mensaje" class="mensaje">{{ mensaje }}</div>
+<div *ngIf="error" class="error">{{ error }}</div>

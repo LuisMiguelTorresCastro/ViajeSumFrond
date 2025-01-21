@@ -1,0 +1,20 @@
+<form [formGroup]="deleteFormGroup" (ngSubmit)="openConfirmDialog()">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Eliminar Agencia</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccionar Agencia</mat-label>
+        <mat-select formControlName="nombreAgencia">
+          <mat-option *ngFor="let agencia of agencias" [value]="agencia.nombreAgencia">
+            {{ agencia.nombreAgencia }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button type="submit">Eliminar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

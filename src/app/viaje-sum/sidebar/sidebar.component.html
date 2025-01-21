@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>navbar</title>
+    <link rel="stylesheet" href="/sidebar.component.css" />
+</head>
+<body class="is-preload left-sidebar">
+    <div id="page-wrapper">
+        <!-- Header -->
+        <mat-toolbar color="primary">
+            <header id="header" class="container">
+                <div id="logo">
+                    <h1><a routerLink="/inicio">Viajes Sum</a></h1> 
+                </div>
+                <nav id="nav">
+                    <ul>
+                      <li class="current"><a routerLink="/Viajes/inicio">Inicio</a></li>
+                      <li><a routerLink="/Viajes/paquetes">Live</a></li>
+                      <li class="has-submenu" [class.active]="isMenuVisible"> 
+                        <a (click)="toggleMenu()" [attr.aria-expanded]="isMenuVisible" aria-label="Menú de perfil" role="button" tabindex="0" (keydown.enter)="toggleMenu()" (keydown.space)="toggleMenu()">
+                            <fa-icon [icon]="['fas', 'user-circle']" size="2x" [ngStyle]="{'color': iconColor}"></fa-icon>
+                            {{ isAuthenticated() ? 'Perfil' : 'Cuenta' }} 
+                        </a>
+                        <ul class="submenu" *ngIf="isMenuVisible" (click)="$event.stopPropagation()" [attr.aria-hidden]="!isMenuVisible" role="menu">
+                            <li *ngIf="!isAuthenticated()" role="none"><a routerLink="/Login/login" role="menuitem">Inicio de sesión</a></li>
+                            <li *ngIf="!isAuthenticated()" role="none"><a routerLink="/Login/register" role="menuitem">Registro</a></li>
+                            <li *ngIf="isAuthenticated()" role="none"><a routerLink="/Us/perfil" role="menuitem">Perfil</a></li>
+                            <li *ngIf="isAuthenticated()" role="none"><a (click)="logout()" role="menuitem">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                  </nav>
+            </header>
+        </mat-toolbar>
+        
+        <div class="content">
+            <router-outlet></router-outlet> <!-- Aquí se renderizan las rutas hijas -->
+        </div>
+    </div>
+</body>
+</html>

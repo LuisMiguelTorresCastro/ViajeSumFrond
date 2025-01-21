@@ -1,0 +1,150 @@
+/* --- General Styles --- */
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Asegura que el body ocupe al menos el alto de la pantalla */
+    padding: 20px;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  
+  /* --- Header Styles --- */
+  header {
+    text-align: center;
+    margin-bottom: 30px; /* Aumenté el margen inferior para más espacio */
+    width: 100%; /* Ocupa todo el ancho disponible */
+  }
+  
+  header h1 {
+    margin: 0; /* Elimina el margen por defecto del h1 */
+  }
+  
+  header h1 img {
+    max-width: 100%; /* Imagen responsive, se ajusta al ancho del contenedor */
+    height: auto;
+    max-height: 250px; /* Altura máxima para evitar que sea demasiado grande */
+  }
+  
+  /* --- Main Styles --- */
+  main {
+    width: 100%;
+    max-width: 450px; /* Aumenté el ancho máximo para una mejor visualización */
+  }
+  
+  .login-section {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px; /* Aumenté el padding para más espacio interior */
+  }
+  
+  /* --- Headings --- */
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 20px; /* Aumenté el margen para más separación */
+    color: #333;
+    text-align: center;
+  }
+  
+  /* --- Form Styles --- */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem; /* Reduje un poco el tamaño para los textos de los labels */
+  }
+  
+  input[type="email"],
+  input[type="password"] {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: calc(100% - 24px); /* Ajuste para el padding */
+  }
+  
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Agregué un box-shadow para el focus */
+  }
+  
+  /* --- Button Styles --- */
+  button {
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Botones ocupan todo el ancho disponible */
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* --- Social Buttons --- */
+  .social-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se ajusten en varias líneas */
+    gap: 10px; /* Espacio entre botones, tanto horizontal como vertical */
+    margin-top: 20px; /* Aumenté el margen superior */
+  }
+  
+  .social-buttons button {
+    flex: 1;
+    min-width: 120px; /* Ancho mínimo para cada botón */
+    margin: 0; /* Eliminé el margen horizontal */
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+  }
+  
+  .social-buttons button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .social-buttons img {
+    max-width: 25px; /* Aumenté el tamaño del ícono */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-right: 8px; /* Ajusté el margen para separar el ícono del texto */
+  }
+  
+  /* --- Footer Styles --- */
+  footer {
+    margin-top: 30px; /* Aumenté el margen superior para más espacio */
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+    width: 100%; /* Ocupa todo el ancho disponible */
+  }
+  
+  /* --- Media Queries --- */
+  @media (max-width: 500px) {
+    .login-section {
+      padding: 20px; /* Reduzco el padding en pantallas pequeñas */
+    }
+  
+    .social-buttons button {
+      min-width: 100%; /* En pantallas pequeñas, los botones ocupan todo el ancho */
+    }
+      header h1 img {
+          max-height: 150px; /* Altura máxima para evitar que sea demasiado grande en mobil */
+    }
+  }

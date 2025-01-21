@@ -1,0 +1,113 @@
+/* Estilo general del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+/* Estilo de los campos de formulario */
+mat-form-field {
+  width: 100%;
+}
+
+mat-label {
+  color: #333333;
+  font-weight: bold;
+}
+
+/* Estilo del input y textarea */
+input[matInput], textarea[matInput] {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Estilo del selector */
+mat-select {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+mat-option {
+  padding: 10px;
+}
+
+/* Estilo del input numérico */
+input[type="number"] {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Estilo de los campos adicionales: Duración, Máximo de Participantes, Popularidad, Valoración */
+mat-form-field.duracion, mat-form-field.maxParticipantes, mat-form-field.popularidad, mat-form-field.valoracion {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo del input de archivo */
+input[type="file"] {
+  margin-top: 10px;
+}
+
+/* Estilo del botón */
+button[mat-raised-button] {
+  align-self: flex-end;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #388e3c;
+}
+
+/* Estilo del contenedor de errores */
+.mat-form-field-underline {
+  display: none;
+}
+
+.mat-error {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+.image-method-selection {
+  display: flex;
+  justify-content: space-around; /* Espacia los botones uniformemente */
+  margin: 20px 0; /* Espaciado superior e inferior */
+}
+
+.image-method-selection button {
+  padding: 10px 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #016dfa; /* Color de fondo por defecto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+  flex: 1; /* Los botones ocupan el mismo espacio */
+  margin: 0 10px; /* Espaciado entre botones */
+}
+
+.image-method-selection button:hover {
+  background-color: #1967dd; /* Color de fondo al pasar el mouse */
+}
+
+.image-method-selection button.active {
+  background-color: #0666f5; /* Color para el botón activo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el botón activo */
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño del botón activo */
+}

@@ -1,0 +1,25 @@
+<mat-card *ngIf="paquete">
+  <mat-card-header>
+    <mat-card-title>{{ paquete.nombrePaquete }}</mat-card-title>
+    <mat-card-subtitle>{{ paquete.descripcion }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <div *ngIf="paquete.imageUrl; else noImage">
+    <img mat-card-image [src]="paquete.imageUrl" [alt]="paquete.nombrePaquete" class="image-preview">
+  </div>
+  <ng-template #noImage>
+    <img mat-card-image src="assets/default-image.jpg" [alt]="paquete.nombrePaquete" class="image-preview"> 
+  </ng-template>
+  <mat-card-content>
+    <p><strong>Categoría:</strong> {{ paquete.categoria }}</p>
+    <p><strong>Costo:</strong> {{ paquete.costo | currency }}</p> 
+    <p><strong>Tipo:</strong> {{ paquete.tipo }}</p> 
+  </mat-card-content>
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <button mat-button mat-raised [routerLink]="['/paquetes', paquete.idPaquete]"> 
+      <mat-icon>more_horiz</mat-icon>
+      Más
+    </button>
+  </mat-card-actions>
+</mat-card>

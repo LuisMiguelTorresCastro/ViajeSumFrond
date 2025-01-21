@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ agencia.nombreAgencia }}</mat-card-title>
+    <mat-card-subtitle>{{ agencia.descripcion }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  
+  <!-- Mostrar imagen de la agencia si está disponible, de lo contrario, mostrar imagen por defecto -->
+  <div *ngIf="agencia.imageUrl; else fileImage">
+    <img [src]="agencia.imageUrl" alt="{{ agencia.nombreAgencia }}" class="image-preview">
+  </div>
+  <ng-template #fileImage>
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="{{ agencia.nombreAgencia }}" class="image-preview">
+  </ng-template>
+
+  <mat-card-content>
+    <p>Correo: {{ agencia.correo }}</p>
+    <p>Teléfono: {{ agencia.telefono }}</p>
+    <p>Dirección: {{ agencia.direccion }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <span class="spacer"></span>
+    <button mat-button mat-raised [routerLink]="['/agencias', agencia.idAgencia]">
+      <mat-icon>more_horiz</mat-icon>
+      Más
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,66 @@
+/* Estilo general del formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+/* Estilo de los campos de formulario */
+mat-form-field {
+  width: 100%;
+}
+
+mat-label {
+  color: #333333;
+  font-weight: bold;
+}
+
+/* Estilo del input y textarea */
+input[matInput], textarea[matInput] {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Estilo del selector */
+mat-select {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+mat-option {
+  padding: 10px;
+}
+
+/* Estilo de los contenedores condicionales */
+div[ngIf] {
+  margin-top: 20px;
+}
+
+/* Estilo del input de archivo */
+input[type="file"] {
+  margin-top: 10px;
+}
+
+/* Estilo del botón */
+button[mat-raised-button] {
+  align-self: flex-end;
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #388e3c;
+}

@@ -1,0 +1,32 @@
+<h1>Agencias</h1>
+<mat-divider></mat-divider>
+
+<div class="card-grid">
+  <div *ngFor="let agencia of agencias" class="card-item">
+    <mat-card class="agencia-card">
+      <mat-card-header>
+        <mat-card-title>{{ agencia.nombreAgencia }}</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      
+      <!-- Mostrar imagen de la agencia si está disponible, de lo contrario, mostrar imagen por defecto -->
+      <div *ngIf="agencia.imageUrl; else noImage">
+        <img mat-card-image [src]="agencia.imageUrl" [alt]="agencia.nombreAgencia" class="image-preview">
+      </div>
+      <ng-template #noImage>
+        <img mat-card-image src="assets/default-image.jpg" [alt]="agencia.nombreAgencia" class="image-preview">
+      </ng-template>
+      
+      <mat-card-content>
+        <div class="card-content">
+          <p>Descripción: {{ agencia.descripcion }}</p>
+          <p>Correo: {{ agencia.correo }}</p>
+          <p>Teléfono: {{ agencia.telefono }}</p>
+          <p>Dirección: {{ agencia.direccion }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+

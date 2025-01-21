@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <link rel="stylesheet" href="register.css"> </head>
+<body>
+  <div class="container">
+    <h2>Crea una cuenta</h2>
+    <form id="register-form">
+      <div class="form-fields-container">
+
+        <div class="form-group">
+          <label for="nombreUsuario">Nombre:</label>
+          <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Ingresa tu nombre" required maxlength="30">
+          <div class="error-message" id="nombreUsuarioError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="apellidoUsuario">Apellido:</label>
+          <input type="text" id="apellidoUsuario" name="apellidoUsuario" placeholder="Ingresa tu apellido" required maxlength="30">
+          <div class="error-message" id="apellidoUsuarioError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="telefonoUsuario">Teléfono:</label>
+          <input type="tel" id="telefonoUsuario" name="telefonoUsuario" placeholder="Ingresa tu teléfono" required maxlength="10" pattern="[0-9]{10}">
+          <div class="error-message" id="telefonoUsuarioError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="direccionUsuario">Dirección:</label>
+          <input type="text" id="direccionUsuario" name="direccionUsuario" placeholder="Ingresa tu dirección" required>
+          <div class="error-message" id="direccionUsuarioError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="ciudad">Ciudad:</label>
+          <input type="text" id="ciudad" name="ciudad" placeholder="Ingresa tu ciudad" required maxlength="255">
+          <div class="error-message" id="ciudadError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="estado">Estado:</label>
+          <input type="text" id="estado" name="estado" placeholder="Ingresa tu estado" required maxlength="255">
+          <div class="error-message" id="estadoError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="codigoPostal">Código Postal:</label>
+          <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Ingresa tu código postal" required maxlength="5" pattern="[0-9]{5}">
+          <div class="error-message" id="codigoPostalError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="correoElectronico">Correo Electrónico:</label>
+          <input type="email" id="correoElectronico" name="correoElectronico" placeholder="Ingresa tu correo electrónico" required>
+          <div class="error-message" id="correoElectronicoError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="contraseñaUsuario">Contraseña:</label>
+          <input type="password" id="contraseñaUsuario" name="contraseñaUsuario" required minlength="8">
+          <div class="error-message" id="contraseñaUsuarioError"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmarContraseña">Confirmar Contraseña:</label>
+          <input type="password" id="confirmarContraseña" name="confirmarContraseña" required>
+          <div class="error-message" id="confirmarContraseñaError"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="register-button">Registrar</button>
+    </form>
+
+    <button class="back-button" onclick="goToInicio()">
+      Volver
+    </button>
+  </div>
+  <script src="register.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<div class="tweet-form">
+  <h2>Enviar un Tweet</h2>
+  <textarea [(ngModel)]="tweetText" placeholder="Escribe tu tweet aquí..." rows="4"></textarea>
+  <button (click)="sendTweet()">Enviar Tweet</button>
+  <p *ngIf="responseMessage">{{ responseMessage }}</p>
+</div>
+
+<div class="tweets-container">
+  <h3>Últimos Tweets</h3>
+  
+  <div *ngIf="!tweets.length">
+    <p>No hay tweets disponibles.</p>
+  </div>
+
+  <div *ngFor="let tweet of tweets">
+    <p>{{ tweet.tweet_text }}</p>
+    <small>{{ tweet.created_at | date:'short' }}</small>
+    <hr>
+  </div>
+</div>
