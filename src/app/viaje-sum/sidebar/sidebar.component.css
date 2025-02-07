@@ -1,8 +1,3 @@
-/* Estilo general para el cuerpo y elementos básicos */
-body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-}
 
 /* Estilo para el logo */
 #logo {
@@ -90,7 +85,7 @@ mat-toolbar {
 #nav li .submenu {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 0;
   background-color: #050505;
   border: 1px solid #252729;
   border-radius: 0.3125rem;
@@ -125,11 +120,6 @@ mat-toolbar {
   color: white;
   outline: none;
 }
-
-/* Ya no necesitas esto ya que el submenu se muestra con el hover*/
-/* #nav .submenu {
-  display: none;
-} */
 
 /* Media queries para responsividad */
 @media (max-width: 48rem) { /* Equivalente a 768px */
