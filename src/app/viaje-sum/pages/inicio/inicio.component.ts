@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Paquete } from '../../../auth/pages.adm/Paquetes/Paquete.interface';
 import { AuthService } from '../../auth-service/auth-service';
 import { OpenWeatherService } from '../clima/clima';
+import { switchMap } from 'rxjs';
 
 @Component({
     selector: 'app-inicio',
@@ -13,7 +14,6 @@ import { OpenWeatherService } from '../clima/clima';
     standalone: false
 })
 export class InicioComponent implements OnInit {
-  private map!: L.Map; // Usa `!` para indicar que se inicializará antes de su uso
   query: string = '';
   results: any[] = [];
   searchPerformed: boolean = false;
@@ -22,10 +22,23 @@ export class InicioComponent implements OnInit {
   userMessage: string = '';
   weatherData: any;
   city: string = 'Madrid';
+  filtrosVisibles = false;
+  filtroCostoMin: number | undefined;
+  filtroCostoMax: number | undefined;
+  filtroValoracion: number | undefined;
+  filtroTipo: string | undefined;
+  filtroDescuento: number | undefined; // Añadido filtroDescuento
+  filtroCategoria: string | undefined;
+  tiposDisponibles: string[] = [];  //para almacenar los tipos unicos
+  categoriasDisponibles: string[]=[]; //
 
   private apiKey: string = 'AIzaSyBvNvglP7o-lrZgF-UOsvp6kIuozxowfmc';
   private searchEngineId: string = '5395e56e7b3eb4ab0';
+  paquetesFiltrados: Paquete[] | undefined;
 
+  private map: L.Map | undefined; // Declaración de la propiedad map
+  private doloresHidalgoCoords = { lat: 21.1579, lon: -100.9343 };
+  weatherSubscription: any;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -35,86 +48,123 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     this.initMap();
-    this.loadTouristLocations(); // Inicializar el mapa y cargar ubicaciones al iniciar
     this.loadPaquetes();
     this.fetchWeather();
   }
 
   // Función para cargar los paquetes desde la API
-  private loadPaquetes() {
-    this.http.get<Paquete[]>('https://viajesumback.onrender.com/Paquetes').subscribe(
-      (data) => {
-        console.log('Paquetes:', data);
-        this.paquetes = data;
-      },
-      (error) => {
-        console.error('Error al cargar los paquetes:', error);
-      }
-    );
+    //Carga los paquetes y ademas extrae los tipos y categorias disponibles
+    private loadPaquetes() {
+      this.http.get<Paquete[]>('https://viajesumback.onrender.com/Paquetes').subscribe(
+          (data) => {
+              this.paquetes = data;
+              this.paquetesFiltrados = data; // Inicialmente, los paquetes filtrados son todos
+              this.extractUniqueTypesAndCategories();
+              this.aplicarFiltros(); // Aplicar filtros iniciales (si los hay)
+          },
+          (error) => {
+              console.error('Error al cargar los paquetes:', error);
+          }
+      );
   }
 
-  private doloresHidalgoCoords = { lat: 21.1579, lon: -100.9343 };
+  // Extrae los tipos y categorias únicos de los paquetes cargados.
+  private extractUniqueTypesAndCategories() {
+      const tipos = new Set<string>();
+      const categorias = new Set<string>();
 
-  private initMap() {
-    // Inicializar el mapa centrado en Dolores Hidalgo
-    this.map = L.map('map').setView(
-      [this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon],
-      12
-    );
-
-    // Cargar capas de mapa
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-    }).addTo(this.map);
-  }
-
-  fetchWeather() {
-    // Consultar el clima para las coordenadas de Dolores Hidalgo
-    this.weatherService
-      .getWeatherByCoords(
-        this.doloresHidalgoCoords.lat,
-        this.doloresHidalgoCoords.lon
-      )
-      .subscribe((data: any) => {
-        this.weatherData = data;
-
-        // Agregar un marcador con información del clima
-        const customIcon = L.icon({
-          iconUrl: 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/map-marker.svg',
-          iconSize: [32, 32],
-          iconAnchor: [16, 32],
-        });
-
-        L.marker(
-          [this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon],
-          { icon: customIcon }
-        )
-          .addTo(this.map)
-          .bindPopup(`
-            <h3>${data.name}</h3>
-            <p>Temperatura: ${data.main.temp}°C</p>
-            <p>Clima: ${data.weather[0].description}</p>
-          `)
-          .openPopup();
+      this.paquetes.forEach(paquete => {
+          if (paquete.tipo) {
+              tipos.add(paquete.tipo);
+          }
+          if(paquete.categoria){
+              categorias.add(paquete.categoria);
+          }
       });
+       // Convertir el Set a un array
+      this.tiposDisponibles = Array.from(tipos);
+      this.categoriasDisponibles = Array.from(categorias);
   }
 
-  // Cargar ubicaciones turísticas en el mapa
-  private loadTouristLocations() {
-    this.http.get<any>('/location').subscribe(
-      (data) => {
-        if (this.map) { // Asegurarse de que el mapa esté inicializado
-          data.locations.forEach((location: any) => {
-            L.marker([location.lat, location.lon]).addTo(this.map)
-              .bindPopup(`<strong>${location.name}</strong><br>Tipo: ${location.type}`);
-          });
-        }
-      },
-      (error) => {
-        console.error('Error al cargar ubicaciones:', error);
-      }
-    );
+
+  toggleFiltros() {
+      this.filtrosVisibles = !this.filtrosVisibles;
   }
+
+aplicarFiltros() {
+  this.paquetesFiltrados = this.paquetes.filter(paquete => {
+      // Si el filtro es undefined, no se aplica
+      if (this.filtroCostoMin !== undefined && paquete.costo < this.filtroCostoMin) return false;
+      if (this.filtroCostoMax !== undefined && paquete.costo > this.filtroCostoMax) return false;
+      if (this.filtroValoracion !== undefined && (paquete.valoracion === undefined || paquete.valoracion < this.filtroValoracion)) return false; // Comprobacion si es undefined
+      if (this.filtroTipo && paquete.tipo !== this.filtroTipo) return false;
+      if (this.filtroDescuento !== undefined && (paquete.descuento === undefined || paquete.descuento < this.filtroDescuento)) return false;// Comprobacion si es undefined
+      if (this.filtroCategoria && paquete.categoria !== this.filtroCategoria) return false;
+
+
+      return true; // Si pasa todos los filtros, se incluye
+  });
+}
+
+limpiarFiltros() {
+  this.filtroCostoMin = undefined;
+  this.filtroCostoMax = undefined;
+  this.filtroValoracion = undefined;
+  this.filtroTipo = undefined;
+  this.filtroDescuento = undefined;
+  this.filtroCategoria = undefined;
+  this.aplicarFiltros(); // Volver a aplicar los filtros (que ahora están limpios)
+}
+
+  getStars(valoracion: number): string {
+    const maxStars = 5;
+    const roundedValoracion = Math.round(valoracion); // Redondear al entero más cercano
+    let stars = '';
+    for (let i = 0; i < maxStars; i++) {
+        if (i < roundedValoracion) {
+            stars += '★'; // Estrella llena
+        } else {
+            stars += '☆'; // Estrella vacía
+        }
+    }
+    return stars;
+  } 
+  private initMap() {
+    this.map = L.map('map').setView(
+        [this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon],
+        12
+    );
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(this.map);
+}
+
+fetchWeather() {
+    this.weatherSubscription = this.weatherService.getWeatherByCoords(this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon)
+        .pipe(
+            switchMap((data: any) => {
+                this.weatherData = data;
+                return this.weatherService.getWeatherDescription(data.weather[0].description);
+            })
+        )
+        .subscribe(translatedDescription => {
+            const customIcon = L.icon({
+                iconUrl: 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/map-marker.svg',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+            });
+
+            L.marker([this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon], { icon: customIcon })
+                .addTo(this.map!)
+                .bindPopup(`
+                    <h3>${this.weatherData.name}</h3>
+                    <p>Temperatura: ${this.weatherData.main.temp}°C</p>
+                    <p>Clima: ${translatedDescription}</p>
+                `)
+                .openPopup();
+        });
+}
 
   // Función para redirigir a la vista de detalles de un paquete
   viewPaqueteDetails(paqueteId?: number | string) {
@@ -152,4 +202,5 @@ export class InicioComponent implements OnInit {
         }
       );
   }
+  
 }
