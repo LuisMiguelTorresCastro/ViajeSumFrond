@@ -1,12 +1,4 @@
-/* General body styles */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  color: #070707;
-  line-height: 1.6;
-  background-color: #f7f7f7; /* Fondo ligero para contraste */
-}
+/* inicio.component.css */
 
 /* Contenedor principal */
 .container {
@@ -15,82 +7,6 @@ body {
   align-items: center; /* Centrar horizontalmente */
   max-width: 1200px;
   margin: 20px auto;
-}
-
-/* Estilos para la barra de búsqueda */
-.search-bar {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 25px; /* Ajusta el radio para redondear los bordes */
-  padding: 10px;
-  width: 100%;
-  max-width: 800px; /* Ajusta el ancho máximo según sea necesario */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  margin-bottom: 30px;
-}
-
-.search-input {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.search-input .icon {
-  margin-right: 5px;
-  color: #555;
-}
-
-.search-input input,
-.search-input input[type="date"] {
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 5px;
-  background-color: transparent; /* Fondo transparente para que no se vea el borde por defecto del input */
-}
-
-.search-input input[type="number"]{
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 5px;
-  width: 85px;
-  background-color: transparent; /* Fondo transparente para que no se vea el borde por defecto del input */
-}
-
-.search-input input[type="date"]::-webkit-calendar-picker-indicator {
-  display: none;
-}
-
-.search-input input[type="date"]::-webkit-inner-spin-button,
-.search-input input[type="date"]::-webkit-clear-button {
-  -webkit-appearance: none;
-  appearance: none;
-  display: none;
-}
-
-.search-input input::placeholder {
-  color: #999;
-}
-
-.search-button {
-  background-color: #090808; /* Color de fondo del botón */
-  color: white;
-  border: none;
-  border-radius: 50%; /* Botón completamente redondo */
-  padding: 10px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
-  transition: background-color 0.3s ease;
-}
-
-.search-button mat-icon {
-  font-size: 24px;
-}
-
-.search-button:hover {
-  background-color: #e0464b; /* Color al pasar el ratón por encima */
 }
 
 /* Contenedor principal para el mapa y las tarjetas */
@@ -103,6 +19,7 @@ body {
   margin-bottom: 20px;
   width: 97.4%;
   flex-wrap: wrap;
+  position: relative; /* Añadido para posicionamiento absoluto del botón */
 }
 
 /* Mapa */
@@ -119,98 +36,6 @@ body {
   width: 100%;
   max-width: 300px;
   height: 100%; /* Ajusta la altura para alinearse con las tarjetas de paquetes */
-}
-
-/* Estilos para los botones de opciones (si se aplican) */
-.button-options button:hover {
-  background-color: #0056b3; /* Color de fondo cuando el usuario pasa el mouse */
-}
-
-.button-options button:active {
-  background-color: #004085; /* Color de fondo cuando el botón es presionado */
-}
-
-.button-options button:focus {
-  outline: none; /* Eliminar el borde de enfoque */
-}
-
-/* Media query para los botones de opciones en pantallas pequeñas (si se aplica) */
-@media (max-width: 768px) {
-  .button-options {
-    flex-direction: column; /* En pantallas pequeñas, apilar los botones */
-    align-items: center; /* Centrar los botones */
-  }
-
-  .button-options button {
-    width: 100%; /* Los botones ocuparán el 100% del ancho disponible */
-    margin-bottom: 10px; /* Espacio entre los botones */
-  }
-}
-
-/* Estilos para listas (si se aplican) */
-ul {
-  padding-left: 20px;
-}
-
-li {
-  margin-bottom: 5px;
-}
-
-/* Estilos para títulos y campos de entrada (si se aplican) */
-h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-
-/* Estilos para botones (si se aplican) */
-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-/* Estilos para resultados (si se aplican) */
-.result-item {
-  margin: 15px 0;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-
-.result-item h3 {
-  font-size: 18px;
-  margin: 0;
-}
-
-.result-item p {
-  color: #666;
-  font-size: 14px;
-  margin: 5px 0 0;
-}
-
-.no-results {
-  color: #999;
-  font-size: 14px;
-  margin-top: 20px;
 }
 
 /* Cuadrícula de paquetes */
@@ -232,8 +57,8 @@ button:hover {
   flex-direction: column;
   align-items: center;
   width: 100%; /* Ajusta al ancho del contenedor en pantallas pequeñas */
-  max-width: 410px; 
-  min-height: 170px; 
+  max-width: 410px;
+  min-height: 170px;
 }
 
 /* Contenedor de imagen */
@@ -254,33 +79,69 @@ button:hover {
 .card-content {
   flex: 1;
   padding: 10px;
-  text-align: left; 
-  font-family: Arial, sans-serif; 
+  text-align: left;
+  font-family: Arial, sans-serif; /* Puedes cambiar la fuente si quieres */
 }
 
 .card-header {
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .card-header mat-card-title {
-  font-size: 1.4rem; 
-  font-weight: bold; 
-  color: #00796b; 
+  font-size: 1.2rem; /* Reducido el tamaño del título */
+  font-weight: bold;
+  color: #000; /* Título negro */
 }
 
 /* Texto dentro de las tarjetas */
 .card-content p {
-  margin: 8px 0; 
-  font-size: 1rem;
-  line-height: 1.5; 
-  word-wrap: break-word; 
-  text-overflow: ellipsis; 
+  margin: 6px 0;       /* Reducido el margen */
+  font-size: 0.8rem;  /* Tamaño de fuente más pequeño */
+  line-height: 1;   /* Ajustado el interlineado */
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  color: #000;         /* Texto negro */
 }
 
 /* Destacar los encabezados en los párrafos */
 .card-content p strong {
-  color: #004d40;
-  font-weight: bold; 
+  color: #000; /* Encabezados en negrita también negros */
+  font-weight: bold;
+}
+
+.filter-button {
+    position: absolute; /* Posicionamiento absoluto */
+    top: 10px;        /* Distancia desde la parte superior */
+    right: 10px;      /* Distancia desde la derecha */
+    z-index: 2;       /* Asegura que esté por encima del mapa */
+}
+
+
+.filter-container {
+  display: none; /* Oculto por defecto */
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+    /*Añadimos esto para que este debajo del boton*/
+    position: relative;
+    z-index: 1;
+}
+
+.filter-container.show-filters {
+  display: block; /* Mostrar cuando la clase está presente */
+}
+.filter-group{
+margin-bottom: 0.5rem;
+}
+
+.filter-group label{
+margin-right: 0.5rem;
+}
+/* Estilos para el botón de limpiar filtros (opcional) */
+.clear-filters-button {
+  margin-top: 1rem; /* Espacio arriba del botón */
 }
 
 /* Responsive design */
@@ -293,22 +154,24 @@ button:hover {
   #map {
     width: 100%;
     margin-bottom: 20px;
-    min-height: 200px; 
+    min-height: 200px;
   }
 
   .card-grid {
     grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
   }
-  .search-bar{
-    flex-direction: column;
-    border-radius: 15px;
-  }
-  .search-input {
-    width: 90%;
-    margin-bottom: 15px;
-  }
-  .search-input input[type="number"]{
-    width: 90%;
-  }
+    /*En pantallas pequeñas queremos que este encima del mapa*/
+     .filter-button {
+        position: relative; /* Volvemos a posicionamiento relativo */
+        top: auto;          /* Quitamos el top */
+        right: auto;        /* Quitamos el right */
+        margin-bottom: 1rem; /* Espacio debajo del botón */
+    }
+}
 
+/* Estilos para las estrellas (opcional, si quieres personalizarlas) */
+.star {
+    color: gold; /* Color de las estrellas */
+    /* font-size: 1.2em;  Ajusta el tamaño si es necesario */
+    /* Puedes agregar más estilos, como espaciado entre estrellas */
 }
