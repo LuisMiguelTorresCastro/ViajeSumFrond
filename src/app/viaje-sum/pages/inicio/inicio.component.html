@@ -19,27 +19,73 @@
                 </mat-card>
             
                 <mat-card-content class="card-content">
-                  <div class="card-grid">
-                    <div *ngFor="let paquete of paquetes" class="card-item">
-                      <mat-card class="paquete-card" (click)="viewPaqueteDetails(paquete?.idPaquete)">                        <div class="image-container">
-                          <img mat-card-image 
-                               [src]="paquete.imageUrl || 'assets/default-image.jpg'" 
-                               [alt]="paquete.nombrePaquete" 
-                               class="image-preview">
-                        </div>
-                        <mat-card-header class="card-header">
-                          <mat-card-title>{{ paquete.nombrePaquete }}</mat-card-title>
-                        </mat-card-header>
-                        <mat-card-content>
-                          <p><strong>Descripción:</strong> {{ paquete.descripcion }}</p>
-                          <p><strong>Categoría:</strong> {{ paquete.categoria }}</p>
-                          <p><strong>Costo:</strong> {{ paquete.costo | currency }}</p>
-                          <p><strong>Tipo:</strong> {{ paquete.tipo }}</p>
-                        </mat-card-content>
-                      </mat-card>
-                    </div>
+
+                  <button mat-icon-button (click)="toggleFiltros()" class="filter-button">
+                      <mat-icon>filter_list</mat-icon>
+                  </button>
+              
+                  <div class="filter-container" [class.show-filters]="filtrosVisibles">
+                      <div class="filter-group">
+                          <label for="costoMin">Costo Mínimo:</label>
+                          <input type="number" id="costoMin" [(ngModel)]="filtroCostoMin" (ngModelChange)="aplicarFiltros()">
+                      </div>
+                      <div class="filter-group">
+                          <label for="costoMax">Costo Máximo:</label>
+                          <input type="number" id="costoMax" [(ngModel)]="filtroCostoMax" (ngModelChange)="aplicarFiltros()">
+                      </div>
+                      <div class="filter-group">
+                          <label for="valoracion">Valoración Mínima:</label>
+                          <select id="valoracion" [(ngModel)]="filtroValoracion" (ngModelChange)="aplicarFiltros()">
+                              <option value="">Cualquiera</option>
+                              <option value="1">1 estrella</option>
+                              <option value="2">2 estrellas</option>
+                              <option value="3">3 estrellas</option>
+                              <option value="4">4 estrellas</option>
+                              <option value="5">5 estrellas</option>
+                          </select>
+                      </div>
+                      <div class="filter-group">
+                          <label for="tipo">Tipo:</label>
+                          <select id="tipo" [(ngModel)]="filtroTipo" (ngModelChange)="aplicarFiltros()">
+                              <option value="">Cualquiera</option>
+                              <option *ngFor="let tipo of tiposDisponibles" [value]="tipo">{{ tipo }}</option>
+                          </select>
+                      </div>
+                      <div class="filter-group">
+                          <label for="descuento">Descuento Mínimo (%):</label>  <input type="number" id="descuento" [(ngModel)]="filtroDescuento" (ngModelChange)="aplicarFiltros()" min="0" max="100"> </div>
+                      <div class="filter-group">
+                          <label for="categoria">Categoría:</label>
+                          <select id="categoria" [(ngModel)]="filtroCategoria" (ngModelChange)="aplicarFiltros()">
+                              <option value="">Cualquiera</option>
+                              <option *ngFor="let categoria of categoriasDisponibles" [value]="categoria">{{ categoria }}</option>
+                          </select>
+                      </div>
+                      <button mat-raised-button color="primary" (click)="limpiarFiltros()" class="clear-filters-button">
+                         Limpiar Filtros
+                      </button>
                   </div>
-                </mat-card-content>
+              
+                  <div class="card-grid">
+                      <div *ngFor="let paquete of paquetesFiltrados" class="card-item">
+                          <mat-card class="paquete-card" (click)="viewPaqueteDetails(paquete?.idPaquete)">
+                              <div class="image-container">
+                                  <img mat-card-image [src]="paquete.imageUrl || 'assets/default-image.jpg'" [alt]="paquete.nombrePaquete" class="image-preview">
+                              </div>
+                              <mat-card-header class="card-header">
+                                  <mat-card-title>{{ paquete.nombrePaquete }}</mat-card-title>
+                              </mat-card-header>
+                              <mat-card-content>
+                                  <p><strong>Descripción:</strong> {{ paquete.descripcion }}</p>
+                                  <p><strong>Categoría:</strong> {{ paquete.categoria }}</p>
+                                  <p><strong>Descuento:</strong> {{ paquete.descuento | currency }}</p>
+                                  <p><strong>Costo:</strong> {{ paquete.costo | currency }}</p>
+                                  <p><strong>Tipo:</strong> {{ paquete.tipo }}</p>
+                                  <p><strong>Calificacion:</strong> {{ getStars(paquete.valoracion) }}</p>
+                              </mat-card-content>
+                          </mat-card>
+                      </div>
+                  </div>
+              </mat-card-content>
             </div>            
     </div>
 
