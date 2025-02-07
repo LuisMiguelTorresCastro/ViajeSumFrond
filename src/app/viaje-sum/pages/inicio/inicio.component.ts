@@ -129,7 +129,10 @@ limpiarFiltros() {
     }
     return stars;
   } 
-  private initMap() {
+
+
+
+private initMap() {
     this.map = L.map('map').setView(
         [this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon],
         12
@@ -149,22 +152,58 @@ fetchWeather() {
             })
         )
         .subscribe(translatedDescription => {
-            const customIcon = L.icon({
-                iconUrl: 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/map-marker.svg',
-                iconSize: [32, 32],
-                iconAnchor: [16, 32],
+            const weatherCondition = this.weatherData.weather[0].main;
+            const iconUrl = this.getWeatherIconUrl(weatherCondition);
+
+            // Keep the default marker (you can customize it if you want)
+            const defaultIcon = L.icon({
+              iconUrl: 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/map-marker.svg',
+              iconSize: [32, 32],
+              iconAnchor: [16, 32],
             });
 
-            L.marker([this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon], { icon: customIcon })
+
+            L.marker([this.doloresHidalgoCoords.lat, this.doloresHidalgoCoords.lon], { icon: defaultIcon }) // Use defaultIcon here
                 .addTo(this.map!)
-                .bindPopup(`
-                    <h3>${this.weatherData.name}</h3>
-                    <p>Temperatura: ${this.weatherData.main.temp}°C</p>
-                    <p>Clima: ${translatedDescription}</p>
-                `)
+                .bindPopup(() => { // Use an arrow function for the popup content
+                    // Create a container element for the popup content
+                    const container = document.createElement('div');
+                    container.innerHTML = `
+                        <h3>${this.weatherData.name}</h3>
+                        <p>Temperatura: ${this.weatherData.main.temp}°C</p>
+                        <p style="display: flex; align-items: center;">  Clima: <img src="${iconUrl}" alt="${weatherCondition}" style="width: 24px; height: 24px; margin-left: 5px;"> ${translatedDescription}
+                        </p>
+                    `;
+                    return container;
+                })
                 .openPopup();
         });
 }
+
+
+
+private getWeatherIconUrl(condition: string): string {
+    switch (condition.toLowerCase()) {
+        case 'clear':
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/weather-sunny.svg';
+        case 'clouds':
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/weather-cloudy.svg';
+        case 'rain':
+        case 'drizzle':
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/weather-pouring.svg';
+        case 'thunderstorm':
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/weather-lightning.svg';
+        case 'snow':
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/weather-snowy.svg';
+        case 'mist':
+        case 'fog':
+        case 'haze':
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/weather-fog.svg';
+        default:
+            return 'https://cdn.jsdelivr.net/npm/@mdi/svg/svg/map-marker.svg';
+    }
+}
+
 
   // Función para redirigir a la vista de detalles de un paquete
   viewPaqueteDetails(paqueteId?: number | string) {
