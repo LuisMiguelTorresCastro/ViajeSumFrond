@@ -58,7 +58,7 @@ export class DelPaqueteComponent implements OnInit {
       return;
     }
 
-    this.http.delete(`http://localhost:3000/Paquetes/${this.paqueteId}`)
+    this.http.delete(`https://viajesumback.onrender.com/Paquetes/${this.paqueteId}`)
       .subscribe(response => {
         window.location.reload(); // Recargar la página después de eliminar
       }, error => {
