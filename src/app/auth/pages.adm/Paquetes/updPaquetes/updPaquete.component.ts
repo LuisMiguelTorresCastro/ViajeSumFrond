@@ -85,7 +85,7 @@ export class UpdPaqueteComponent implements OnInit {
     // Construir el encabezado de la solicitud
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
-    this.http.patch(`http://localhost:3000/Paquetes/${this.paqueteIdSeleccionado}`, paqueteActualizado, { headers })
+    this.http.patch(`https://viajesumback.onrender.com/Paquetes/${this.paqueteIdSeleccionado}`, paqueteActualizado, { headers })
       .subscribe(
         (response) => {
           console.log('Paquete actualizado:', response);
